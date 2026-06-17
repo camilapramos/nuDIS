@@ -1,5 +1,5 @@
 import model sm
-generate e- p > ve j
+generate ve p > e- j
 output nuDIS_charged
 
 launch nuDIS_charged

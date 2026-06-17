@@ -77,7 +77,7 @@ define l+ = e+ mu+
 define l- = e- mu-
 define vl = ve vm vt
 define vl~ = ve~ vm~ vt~
-generate e- p > ve j
+generate ve p > e- j
 output nuDIS_charged
 ]]>
 </MG5ProcCard>
@@ -100,7 +100,7 @@ output nuDIS_charged
 # Process(es) requested : mg2 input                                  *
 #*********************************************************************
 # Begin PROCESS # This is TAG. Do not modify this line
-e- p > ve j           #Process
+ve p > e- j           #Process
 # Be carefull the coupling are here in MG5 convention
           
 end_coup           # End the couplings input
@@ -163,7 +163,7 @@ sm
 #*********************************************************************
 # Beam polarization from -100 (left-handed) to 100 (right-handed)    *
 #*********************************************************************
-  0.0	= polbeam1 ! beam polarization for beam 1
+  -100.0	= polbeam1 ! beam polarization for beam 1
   0.0	= polbeam2 ! beam polarization for beam 2
 
 
@@ -180,6 +180,11 @@ sm
   lhapdf	= pdlabel2 ! PDF type for beam #2
   324900	= lhaid ! if pdlabel=lhapdf, this is the lhapdf number
 # To see heavy ion options: type "update ion_pdf"
+  0	= evaorder ! 0=EVA@LLA, 1=full LP, 2=NLP [2502.07878]
+  1	= eva_xcut ! =1 [default] for restricting xi > MV/Ebeam
+                          ! =0 for no restriction [results of 2111.02442]
+  0	= ievo_eva ! scale evolution for EW pdfs (eva) in LLA
+                          ! =0 for evo by q^2; =1 for evo by pT^2
 
 #*********************************************************************
 # Renormalization and factorization scales                           *
@@ -234,9 +239,9 @@ sm
 # Minimum and maximum pt's (for max, -1 means no cut)                *
 #*********************************************************************
   0.0	= ptj ! minimum pt for the jets 
-  0.0	= misset ! minimum missing Et (sum of neutrino's momenta)
+  0.0	= ptl ! minimum pt for the charged leptons 
   -1.0	= ptjmax ! maximum pt for the jets
-  -1.0	= missetmax ! maximum missing Et (sum of neutrino's momenta)
+  -1.0	= ptlmax ! maximum pt for the charged leptons
   {}	= pt_min_pdg ! pt cut for other particles (use pdg code). Applied on particle and anti-particle
   {}	= pt_max_pdg ! pt cut for other particles (syntax e.g. {6: 100, 25: 50}) 
 #
@@ -246,11 +251,15 @@ sm
 # Maximum and minimum absolute rapidity (for max, -1 means no cut)   *
 #*********************************************************************
   -1.0	= etaj ! max rap for the jets 
+  -1.0	= etal ! max rap for the charged leptons 
+  0.0	= etalmin ! min rap for the charged leptons
   {}	= eta_min_pdg ! rap cut for other particles (use pdg code). Applied on particle and anti-particle
   {}	= eta_max_pdg ! rap cut for other particles (syntax e.g. {6: 2.5, 23: 5})
 #*********************************************************************
 # Minimum and maximum DeltaR distance                                *
 #*********************************************************************
+  0.0	= drjl ! min distance between jet and lepton 
+  -1.0	= drjlmax ! max distance between jet and lepton
 #*********************************************************************
 # Minimum and maximum invariant mass for pairs                       *
 #*********************************************************************
@@ -472,12 +481,12 @@ Beams:LHEF=unweighted_events.lhe.gz
 </MGPythiaCard>
 <MGGenerationInfo>
 #  Number of Events        :       10000
-#  Integrated weight (pb)  :       5.3246
+#  Integrated weight (pb)  :       6.0949
 </MGGenerationInfo>
 </header>
 <init>
-11 2212 1.000000e+03 1.000000e+00 0 0 247000 247000 -4 1
-5.324600e+00 1.134300e-02 5.333600e+00 1
+12 2212 1.000000e+03 1.000000e+00 0 0 247000 247000 -4 1
+6.094900e+00 1.110300e-02 6.114200e+00 1
 <generator name='MadGraph5_aMC@NLO' version='3.7.1'>please cite 1405.0301 </generator>
 </init>
 </LesHouchesEvents>
