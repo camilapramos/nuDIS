@@ -274,7 +274,7 @@ sm
   True	= use_syst ! Enable systematics studies
 #
   systematics	= systematics_program ! none, systematics [python], SysCalc [depreceted, C++]
-  ['--mur=0.5,1,2', '--muf=0.5,1,2', '--pdf=errorset']	= systematics_arguments ! see: https://cp3.irmp.ucl.ac.be/projects/madgraph/wiki/Systematics#Systematicspythonmodule
+  ['--dyn=3']	= systematics_arguments ! see: https://cp3.irmp.ucl.ac.be/projects/madgraph/wiki/Systematics#Systematicspythonmodule
 ]]>
 </MGRunCard>
 <slha>
@@ -436,6 +436,15 @@ SysCalc:fullCutVariation = off
 ! often irrelevant for phenomenology and very slow. You can turn this 
 ! feature off by uncommenting the line below if so desired.
 !partonlevel:mpi = off
+!
+! Additional general parameters.
+!
+BeamRemnants:primordialKT=on
+TimeShower:QEDshowerByQ=on
+TimeShower:QEDshowerByL=on
+SpaceShower:QEDshowerByQ=on
+SpaceShower:QEDshowerByL=on
+tune:pp=18
 !
 ! Additional technical parameters set by MG5_aMC.
 !
